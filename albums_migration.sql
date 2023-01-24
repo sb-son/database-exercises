@@ -5,15 +5,14 @@ CREATE TABLE IF NOT EXISTS albums (
     artist VARCHAR(50) NOT NULL,
     record_name VARCHAR(150) NOT NULL,
     release_date INT(4) NOT NULL DEFAULT (YEAR(NOW())),
-    sales FLOAT(10,2) NOT NULL,
+    sales FLOAT NOT NULL,
     genre VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
 DELIMITER $$
-CREATE TRIGGER albums_bi_trig
-    BEFORE INSERT ON albums
-    FOR EACH ROW
+CREATE TRIGGER albums_between_year_trig BEFORE INSERT ON albums
+FOR EACH ROW
 BEGIN
     IF NEW.release_date < 1800 OR NEW.release_date > YEAR(NOW()) THEN
         SIGNAL SQLSTATE '45000'
