@@ -11,8 +11,20 @@ CREATE TABLE IF NOT EXISTS albums (
 );
 
 DELIMITER $$
-CREATE TRIGGER albums_between_year_trig BEFORE INSERT ON albums
+CREATE TRIGGER albums_bi_trig BEFORE INSERT ON albums
 FOR EACH ROW
+BEGIN
+    IF NEW.release_date < 1800 OR NEW.release_date > YEAR(NOW()) THEN
+        SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Invalid release date, it should be between 1800 and the current year';
+END IF;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER albums_bu_trig BEFORE UPDATE ON albums
+    FOR EACH ROW
 BEGIN
     IF NEW.release_date < 1800 OR NEW.release_date > YEAR(NOW()) THEN
         SIGNAL SQLSTATE '45000'
