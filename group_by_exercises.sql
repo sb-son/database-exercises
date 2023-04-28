@@ -27,3 +27,16 @@ GROUP BY last_name;
 SELECT COUNT(*) AS '# of people', gender
 FROM employees
 WHERE first_name IN('Irena', 'Vidya', 'Maya') GROUP BY gender;
+
+SELECT COUNT(*) AS 'number of employees with same first name' FROM employees GROUP BY first_name;
+
+SELECT COUNT(*) FROM employees
+    JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
+    JOIN departments ON dept_emp.dept_no = departments.dept_no
+GROUP BY departments.dept_name;
+
+SELECT departments.dept_name, COUNT(*) AS num_employees
+FROM employees
+    JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
+    JOIN departments ON dept_emp.dept_no = departments.dept_no
+GROUP BY departments.dept_name;
