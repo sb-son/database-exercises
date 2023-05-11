@@ -72,5 +72,10 @@ JOIN dept_emp de on e.emp_no = de.emp_no
 JOIN departments d on de.dept_no = d.dept_no
 WHERE d.dept_name = 'Development';
 
+SELECT e.first_name, e.last_name, s.salary
+FROM employees e
+JOIN salaries s on e.emp_no = s.emp_no
+WHERE s.salary > 150000;
+
 
 
