@@ -77,5 +77,10 @@ FROM employees e
 JOIN salaries s on e.emp_no = s.emp_no
 WHERE s.salary > 150000;
 
+SELECT e.first_name, e.last_name, t.title
+FROM employees e
+JOIN titles t on e.emp_no = t.emp_no
+WHERE first_name = 'Frederique';
+
 
 
